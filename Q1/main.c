@@ -291,7 +291,7 @@ int main()
                 printf("Digite o código da disciplina que deseja remover: ");
                 scanf("%d", &codigo_disciplina);
 
-                remover_matricula(&aluno_encontrado->matricula, codigo_disciplina);
+                remover_matricula(&aluno_encontrado->matriculas, codigo_disciplina);
                 printf("Disciplina removida da matrícula do aluno.\n");
             }
             break;

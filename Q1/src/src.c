@@ -167,7 +167,7 @@ void inserir_matricula(Arv_Matricula **matricula, int codigo, int *existe) {
 
 void cadastrar_matricula(Alunos **aluno, int codigo, int matricula) {
     if (*aluno != NULL) {
-        if ((*aluno)->matriculas == matricula) {  // Verifica se o aluno tem o número de matrícula fornecido
+        if ((*aluno)->matricula == matricula) {  // Verifica se o aluno tem o número de matrícula fornecido
             int ja_existe = 0;
             // Insere a disciplina/matrícula na árvore de matrículas do aluno
             inserir_matricula(&(*aluno)->matriculas, codigo, &ja_existe); // Usa o campo correto 'matriculas'
@@ -310,7 +310,7 @@ void exibir_disciplinasporcurso(Arv_Cursos *curso, int codigo_curso)
             printf("Disciplinas do curso %s:\n", curso->nome_curso);
             printf("-------------------------------\n");
 
-            exibir_disciplinasporcurso_recursivamente(disciplina_atual);
+            exibir_disciplinas_de_um_curso_recursivamente(disciplina_atual);
         }
 
         exibir_disciplinasporcurso(curso->esq, codigo_curso);
@@ -374,7 +374,7 @@ void exibir_disciplina_do_curso(Arv_Cursos *curso_atual, int codigo_disciplina, 
 // Exibe as disciplinas que um aluno está matriculado
 void exibir_disciplina_aluno(Arv_Matricula *matriculas, Arv_Cursos *cursos, int codigo_curso) {
     if (matriculas != NULL) {
-        exibir_disciplina(cursos, matriculas->codigo_disciplina, codigo_curso); // Exibe a disciplina do aluno
+        exibir_disciplina_do_curso(cursos, matriculas->codigo_disciplina, codigo_curso); // Exibe a disciplina do aluno
         exibir_disciplina_aluno(matriculas->esq, cursos, codigo_curso); // Chamada recursiva para a subárvore esquerda
         exibir_disciplina_aluno(matriculas->dir, cursos, codigo_curso); // Chamada recursiva para a subárvore direita
     }
@@ -800,7 +800,7 @@ int notas_disciplina_periodo(Arv_Notas *notas, int periodo)
     else
     {
         if (notas->semestre == periodo)
-            printf("Disciplina: %d, Nota Final: %.2f\n", n->codigo_disciplina, n->nota_final); // Exibe nota se o semestre corresponder
+            printf("Disciplina: %d, Nota Final: %.2f\n", notas->codigo_disciplina, notas->nota_final); // Exibe nota se o semestre corresponder
 
         notas_disciplina_periodo(notas->esq, periodo); // Busca na subárvore esquerda
         notas_disciplina_periodo(notas->dir, periodo); // Busca na subárvore direita
