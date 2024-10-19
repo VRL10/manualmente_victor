@@ -5,7 +5,6 @@
 #include <ctype.h>
 #include <time.h>
 
-int contador_disciplina = 1; // não reenicia
 // ---------------------------------------------------- XXXXXX -------------------------------------------------
 // I - Cadastrar alunos a qualquer momento na lista, de forma que só possa cadastrar um código de curso que
 // já tenha sido cadastrado na árvore de cursos.
@@ -139,7 +138,7 @@ int cadastrar_disciplina(Arv_Cursos **curso, Arv_Disciplina *No, int codigo_curs
 }
 
 
-
+int contador_disciplina = 1; // não reenicia
 
 void gerar_codigo_disciplina(int *codigo_disciplina) {
     *codigo_disciplina = contador_disciplina;

@@ -45,6 +45,7 @@ typedef struct arv_cursos {
     Alunos *alunos;
 } Arv_Cursos;
 
+extern int contador_disciplina;
 
 // ---------- Funções relacionadas a Cursos ------------
 void gerar_codigo_disciplina(int *codigo_disciplina);
@@ -75,8 +76,8 @@ void mostrar_notas_aluno(Alunos *aluno, Arv_Disciplina *disciplinas, int periodo
 
 
 // ---------- Funções Referentes a Disciplina ------------
-void exibir_disciplina_periodo(Arv_Cursos *r, int periodo);
-int cadastrar_disciplina(Arv_Cursos **curso, Arv_Disciplina *No, int idcurso);
+void exibir_disciplina_periodo(Arv_Cursos *curso, int periodo);
+int cadastrar_disciplina(Arv_Cursos **curso, Arv_Disciplina *No, int codigo_curso);
 void exibir_disciplinasporcurso(Arv_Cursos *curso, int codigo_curso);
 int remover_disciplina_curso(Arv_Cursos **cursos, Alunos *alunos, int idcurso, int codigo_disciplina);
 void exibir_disciplinas_aluno_especifico(Alunos *aluno, Arv_Cursos *cursos, int matricula);
