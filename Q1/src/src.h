@@ -20,7 +20,7 @@ typedef struct arv_matricula {
 
 typedef struct arv_notas {
     int codigo_disciplina;
-    float semestre;
+    int semestre;
     float nota_final;
     struct arv_notas *esq;
     struct arv_notas *dir;
@@ -68,10 +68,10 @@ void apresentar_matriculas(Arv_Matricula *r);
 int verificar_matriculas_alunos(Alunos *aluno, int codigo_disciplina);
 
 // ---------- Funções relacionadas a Notas ------------
-int cadastrar_nota(Alunos **a, int mat, int codigo, int semestre, float notafinal);
+int cadastrar_nota(Alunos **aluno, int matricula, int codigo, int semestre, float nota_final);
 void exibir_nota_aluno_disciplina(Arv_Cursos *curso, Alunos *aluno, int codigo_disciplina, int matricula);
 void notas_disciplina_periodo_aluno(Alunos *aluno, int periodo, int matricula);
-int notas_disciplina_periodo(Arv_Notas *n, int periodo);
+int notas_disciplina_periodo(Arv_Notas *notas, int periodo);
 void mostrar_notas_aluno(Alunos *aluno, Arv_Disciplina *disciplinas, int periodo);
 
 

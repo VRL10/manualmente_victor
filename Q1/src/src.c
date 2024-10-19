@@ -679,6 +679,23 @@ void exibir_notas_alunos(Arv_Notas *nota, Arv_Disciplina *disciplina, int period
     }
 }
 
+int exibir_nome_curso(Arv_Cursos *curso, int codigo_curso)
+{
+    int count_periodos = 0;
+    if(curso != NULL)
+    {
+        if(curso->codigo_curso == codigo_curso)
+        {
+            printf("Curso: %s\n", curso->nome_curso);
+            count_periodos = curso->quantidade_periodos;
+        }
+        else if(codigo_curso < curso->codigo_curso)
+            count_periodos = exibir_nome_curso(curso->esq, codigo_curso);
+        else
+            count_periodos = exibir_nome_curso(curso->dir, codigo_curso);
+    }
+    return (count_periodos);
+}
 
 void consultar_historico(Alunos *aluno, Arv_Cursos *curso, int matricula)
 {
@@ -691,7 +708,7 @@ void consultar_historico(Alunos *aluno, Arv_Cursos *curso, int matricula)
             printf("Aluno: %s\n", aluno->nome);
             printf("\n------------------\n");
             int count_periodos = 0;
-            count_periodos = exibir_nome_do_curso(curso, aluno->codigo_curso);
+            count_periodos = exibir_nome_curso(curso, aluno->codigo_curso);
             printf("Historico:\n");
             for (int i = 0; i < count_periodos; i++)
                 exibir_notas_alunos(aluno->notas, curso->disciplina, i+1);
@@ -776,17 +793,17 @@ Alunos *procurar_aluno_por_matricula_no_curso(Arv_Cursos *curso, int codigo_curs
 }
 
 
-int notas_disciplina_periodo(Arv_Notas *n, int periodo)
+int notas_disciplina_periodo(Arv_Notas *notas, int periodo)
 {
-    if (n == NULL)
+    if (notas == NULL)
         printf("Nota nao encontrada\n"); // Mensagem caso a nota não seja encontrada
     else
     {
-        if (n->semestre == periodo)
+        if (notas->semestre == periodo)
             printf("Disciplina: %d, Nota Final: %.2f\n", n->codigo_disciplina, n->nota_final); // Exibe nota se o semestre corresponder
 
-        notas_disciplina_periodo(n->esq, periodo); // Busca na subárvore esquerda
-        notas_disciplina_periodo(n->dir, periodo); // Busca na subárvore direita
+        notas_disciplina_periodo(notas->esq, periodo); // Busca na subárvore esquerda
+        notas_disciplina_periodo(notas->dir, periodo); // Busca na subárvore direita
     }
 }
 
