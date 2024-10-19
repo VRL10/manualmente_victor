@@ -170,7 +170,7 @@ void cadastrar_matricula(Alunos **aluno, int codigo, int matricula) {
         if ((*aluno)->matricula == matricula) {  // Verifica se o aluno tem o número de matrícula fornecido
             int ja_existe = 0;
             // Insere a disciplina/matrícula na árvore de matrículas do aluno
-            inserir_matricula(&(*aluno)->matricula, codigo, &ja_existe); // Usa o campo correto 'matriculas'
+            inserir_matricula(&(*aluno)->matriculas, codigo, &ja_existe); // Usa o campo correto 'matriculas'
         } else {
             // Se a matrícula do aluno atual não é a correta, continua buscando no próximo aluno
             cadastrar_matricula(&(*aluno)->prox, codigo, matricula);
@@ -235,9 +235,9 @@ int cadastrar_nota(Alunos **aluno, int matricula, int codigo, int semestre, floa
     if (*aluno != NULL) {
         if ((*aluno)->matricula == matricula) {
             int disciplina_encontrada = 0; 
-            verificar_existencia_disciplina((*aluno)->matricula, codigo, &disciplina_encontrada);
+            verificar_existencia_disciplina((*aluno)->matriculas, codigo, &disciplina_encontrada);
             if (disciplina_encontrada == 1) {
-                remover_matricula(&(*aluno)->matricula, codigo);
+                remover_matricula(&(*aluno)->matriculas, codigo);
                 cadastrar_nota_aux(&(*aluno)->notas, codigo, nota_final, semestre); 
                 resultado = 1; // Indica que a nota foi cadastrada com sucesso
             }
@@ -372,11 +372,11 @@ void exibir_disciplina_do_curso(Arv_Cursos *curso_atual, int codigo_disciplina, 
 }
 
 // Exibe as disciplinas que um aluno está matriculado
-void exibir_disciplina_aluno(Arv_Matricula *matricula, Arv_Cursos *cursos, int codigo_curso) {
-    if (matricula != NULL) {
-        exibir_disciplina(cursos, matricula->codigo_disciplina, codigo_curso); // Exibe a disciplina do aluno
-        exibir_disciplina_aluno(matricula->esq, cursos, codigo_curso); // Chamada recursiva para a subárvore esquerda
-        exibir_disciplina_aluno(matricula->dir, cursos, codigo_curso); // Chamada recursiva para a subárvore direita
+void exibir_disciplina_aluno(Arv_Matricula *matriculas, Arv_Cursos *cursos, int codigo_curso) {
+    if (matriculas != NULL) {
+        exibir_disciplina(cursos, matriculas->codigo_disciplina, codigo_curso); // Exibe a disciplina do aluno
+        exibir_disciplina_aluno(matriculas->esq, cursos, codigo_curso); // Chamada recursiva para a subárvore esquerda
+        exibir_disciplina_aluno(matriculas->dir, cursos, codigo_curso); // Chamada recursiva para a subárvore direita
     }
 }
 
@@ -384,7 +384,7 @@ void exibir_disciplina_aluno(Arv_Matricula *matricula, Arv_Cursos *cursos, int c
 void exibir_disciplinas_aluno_especifico(Alunos *aluno, Arv_Cursos *cursos, int matricula) {
     if (aluno != NULL) {
         if (aluno->matricula == matricula)
-            exibir_disciplina_aluno(aluno->matricula, cursos, aluno->codigo_curso); // Exibe as disciplinas do aluno
+            exibir_disciplina_aluno(aluno->matriculas, cursos, aluno->codigo_curso); // Exibe as disciplinas do aluno
         else
             exibir_disciplinas_aluno_especifico(aluno->prox, cursos, matricula); // Chamada recursiva para o próximo aluno
     }

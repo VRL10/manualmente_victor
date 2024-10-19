@@ -31,7 +31,7 @@ typedef struct alunos {
     char nome[100];
     int codigo_curso;
     Arv_Notas *notas;
-    Arv_Matricula *matricula;
+    Arv_Matricula *matriculas;
     struct alunos *prox;
 } Alunos;
 
