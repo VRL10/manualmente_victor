@@ -167,7 +167,7 @@ void inserir_matricula(Arv_Matricula **matricula, int codigo, int *existe) {
 
 void cadastrar_matricula(Alunos **aluno, int codigo, int matricula) {
     if (*aluno != NULL) {
-        if ((*aluno)->matricula == matricula) {  // Verifica se o aluno tem o número de matrícula fornecido
+        if ((*aluno)->matriculas == matricula) {  // Verifica se o aluno tem o número de matrícula fornecido
             int ja_existe = 0;
             // Insere a disciplina/matrícula na árvore de matrículas do aluno
             inserir_matricula(&(*aluno)->matriculas, codigo, &ja_existe); // Usa o campo correto 'matriculas'
@@ -539,7 +539,7 @@ void confirmar_remocao_disciplina(Alunos *alunos, int codigo_disciplina, int *si
     int achou = 0;
 
     if (alunos != NULL) {
-        procurar_matricula(alunos->matricula, codigo_disciplina, &achou);
+        procurar_matricula(alunos->matriculas, codigo_disciplina, &achou);
 
         if (achou != 0)
             *sim_ou_nao = 1;
