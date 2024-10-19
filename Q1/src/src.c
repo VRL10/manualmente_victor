@@ -141,7 +141,7 @@ int cadastrar_disciplina(Arv_Cursos **curso, Arv_Disciplina *No, int codigo_curs
 
 
 
-void gerar_codigo_para_disciplina(int *codigo_disciplina) {
+void gerar_codigo_disciplina(int *codigo_disciplina) {
     *codigo_disciplina = contador_disciplina;
     contador_disciplina++;
 }

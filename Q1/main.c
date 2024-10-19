@@ -110,7 +110,7 @@ int main()
                 break;
             }
 
-            gerar_codigo_para_disciplina(&coddisc);
+            gerar_codigo_disciplina(&coddisc);
             disc->codigo_disciplina = coddisc;
 
             saida = cadastrar_disciplina(&curso_encontrado, disc, codigo_curso);
@@ -291,7 +291,7 @@ int main()
                 printf("Digite o código da disciplina que deseja remover: ");
                 scanf("%d", &codigo_disciplina);
 
-                remover_matricula(&aluno_encontrado->mat, codigo_disciplina);
+                remover_matricula(&aluno_encontrado->matricula, codigo_disciplina);
                 printf("Disciplina removida da matrícula do aluno.\n");
             }
             break;
